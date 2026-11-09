@@ -1,0 +1,26 @@
+# SMS Spam Detection (AI101 Mini Project)
+#
+# REQUIRES Python 3.12 or newer (numpy 2.5.x and scipy 1.18.x do not
+# install on Python 3.11 or older). Check yours with:  python --version
+#
+# Install with:  pip install -r requirements.txt
+#
+# These are the exact versions used to run the notebook and produce the
+# results in the README, slides and video.
+
+# Data and numbers
+pandas==3.0.5
+numpy==2.5.2
+
+# Machine learning (also installs joblib and threadpoolctl)
+scikit-learn==1.9.0
+scipy==1.18.0
+
+# Plots
+matplotlib==3.11.1
+seaborn==0.13.2
+
+# Running the notebook
+# "jupyter" installs Jupyter Notebook so the command  jupyter notebook  works.
+jupyter
+ipykernel==7.3.0
