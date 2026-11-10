@@ -225,7 +225,7 @@ The notebook also shows five plots (class balance, correlation heatmap, loss cur
 ## Links
 
 - Slides (5 slides): [Read PDF](docs/slides.pdf)
-- Video (max 5 min): [TODO: unlisted YouTube or Drive link]
+- Video (max 7 min): 
 
 ## AI-use disclosure
 
