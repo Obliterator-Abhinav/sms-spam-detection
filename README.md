@@ -4,7 +4,7 @@ Classifies SMS text messages as spam or ham (normal) from the words in the messa
 
 ![AI101](https://img.shields.io/badge/AI101-Mini--Project-blue) ![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13-yellow)
 
-**Course:** AI101: Data Science and AI Essentials with Python, School of AI and Data Engineering, IIT Ropar **Team no.:** [TEAM NUMBER]
+**Course:** AI101: Data Science and AI Essentials with Python, School of AI and Data Engineering, IIT Ropar **Team no.:** 48
 
 ## Team and roles
 
