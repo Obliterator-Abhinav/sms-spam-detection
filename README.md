@@ -81,7 +81,7 @@ Check your Python version first:
 | Mac / Linux | `python3 --version` (or `python3.13 --version`) |
 
 ### Step 1: Download the project
-Open a terminal (Windows: Command Prompt, `cmd`) in the folder where you want the project, then run:
+Open a terminal (Windows: Command Prompt, `cmd`) inside the folder where you want the project by typing cmd in the address bar, then run:
 
 ```
 git clone https://github.com/Obliterator-Abhinav/sms-spam-detection.git
@@ -96,6 +96,8 @@ This keeps the project's libraries separate from everything else on the computer
 **Windows (Command Prompt):**
 ```
 py -3.13 -m venv venv
+```
+```
 venv\Scripts\activate
 ```
 (Use `py -3.12` if you only have Python 3.12.)
@@ -114,6 +116,10 @@ The line in the terminal should now start with `(venv)`. Check with `python --ve
 ### Step 3: Install the libraries
 ```
 pip install -r requirements.txt
+```
+If there is an error of 'Blocked by your organization' something like that, try
+```
+python -m pip install -r requirements.txt
 ```
 This takes about 2 to 5 minutes. It must end with a line that starts with `Successfully installed`. If you see red text with `error`, see the table at the bottom.
  
