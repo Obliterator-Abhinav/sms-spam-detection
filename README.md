@@ -122,7 +122,7 @@ py -m pip install -r requirements.txt
 ```
 Mac/Linux:
 ```
-python -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 This takes about 2 to 5 minutes. It must end with a line that starts with `Successfully installed`. If you see red text with `error`, see the table at the bottom.
  
@@ -132,7 +132,7 @@ py -m notebook
 ```
 For Mac/Linux:
 ```
-python -m notebook
+python3 -m notebook
 ```
 A browser tab opens. If it does not, copy the `http://localhost:8888/...` address from the terminal into your browser. Leave the terminal window open while you use the notebook.
  
