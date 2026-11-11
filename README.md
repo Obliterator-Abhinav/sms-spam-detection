@@ -69,7 +69,7 @@ sms-spam-detection/
 Tested on Windows 11 with Python 3.13 (64-bit). The Mac and Linux commands below are the standard equivalents.
 
 ### What you need
-- **Python 3.12 or 3.13 (64-bit).** Do not use Python 3.11 or older, and do not use 3.14 or newer. The libraries in `requirements.txt` do not install on those versions.
+- **Python** 3.12, 3.13 or 3.14 (64-bit). Do not use Python 3.11 or older, and do not use 3.15 or newer. The libraries in requirements.txt do not install on those versions.
 - **Git**, to download the project.
 - About 1 GB of free disk space and an internet connection for the install.
 
