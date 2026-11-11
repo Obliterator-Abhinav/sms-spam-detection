@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Spam Detection | AI101 Mini-Project</title>
+<style>
+:root{
+  --bg:#070c1c;--panel:#101a33;--panel2:#162343;--white:#f1f5ff;
+  --muted:#a0b0cf;--blue:#46a0ff;--cyan:#2ddcdb;--purple:#9e6eff;
+  --pink:#ff5b91;--green:#46dc96;--yellow:#ffc657;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--white);
+font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
+radial-gradient(circle at 82% 14%,rgba(70,100,255,.17),transparent 28%),
+radial-gradient(circle at 12% 85%,rgba(45,220,219,.09),transparent 30%),
+linear-gradient(135deg,#070c1c 0%,#0a1025 55%,#090e20 100%)}
+.deck{height:100%;width:100%;position:relative}
+.slide{position:absolute;inset:0;padding:clamp(25px,5vw,70px) clamp(25px,6vw,90px) 70px;
+display:none;overflow:auto;animation:appear .35s ease}
+.slide.active{display:flex;flex-direction:column}
+@keyframes appear{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:clamp(10px,.9vw,13px);letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:18px}
+h1{font-size:clamp(42px,7vw,90px);line-height:.98;letter-spacing:-.055em;margin:0;font-weight:850}
+h2{font-size:clamp(28px,4vw,52px);line-height:1.04;letter-spacing:-.04em;margin:0 0 12px}
+.subtitle{font-size:clamp(14px,1.5vw,19px);color:var(--muted);max-width:850px;line-height:1.5}
+.accent-line{height:4px;width:86px;border-radius:10px;background:linear-gradient(90deg,var(--cyan),var(--purple));margin:27px 0}
+.footer{position:fixed;bottom:20px;left:5vw;right:5vw;display:flex;justify-content:space-between;
+font-size:10px;letter-spacing:.12em;color:#7183a8;text-transform:uppercase;pointer-events:none}
+.progress{position:fixed;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width .25s}
+.controls{position:fixed;right:28px;bottom:32px;display:flex;gap:8px;z-index:10}
+button{border:1px solid #33476d;background:#111d39;color:var(--white);border-radius:12px;padding:10px 15px;
+font-size:13px;cursor:pointer;backdrop-filter:blur(8px)}
+button:hover{border-color:var(--cyan);background:#17294b}
+.grid{display:grid;gap:18px}
+.two{grid-template-columns:1fr 1.2fr}
+.four{grid-template-columns:repeat(4,1fr)}
+.card{background:linear-gradient(145deg,rgba(22,35,67,.94),rgba(13,23,46,.94));border:1px solid rgba(105,140,200,.18);
+border-radius:20px;padding:clamp(17px,2vw,27px);box-shadow:0 15px 50px rgba(0,0,0,.16)}
+.card h3{font-size:clamp(14px,1.35vw,18px);margin:0 0 10px}
+.small{font-size:clamp(11px,1vw,14px);color:var(--muted);line-height:1.5}
+.tag{display:inline-flex;padding:6px 10px;border-radius:99px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.blue{background:rgba(70,160,255,.18);color:#86c2ff}.purple{background:rgba(158,110,255,.18);color:#c5aaff}
+.cyan{background:rgba(45,220,219,.15);color:#74efeb}.pink{background:rgba(255,91,145,.16);color:#ff9bbb}
+.green{background:rgba(70,220,150,.15);color:#8af0bd}.yellow{background:rgba(255,198,87,.15);color:#ffdb8d}
+.phone-wrap{display:flex;align-items:center;justify-content:center;min-height:390px;position:relative}
+.phone{width:min(245px,42vw);padding:12px;border-radius:32px;background:#050a18;border:1px solid #466da9;
+box-shadow:0 0 65px rgba(70,160,255,.18),inset 0 0 0 2px #152747;transform:rotate(4deg)}
+.phone-screen{background:linear-gradient(160deg,#162343,#0c1730);border-radius:23px;padding:22px 14px;min-height:310px}
+.message{padding:13px;border-radius:13px;background:#21345a;margin:17px 0;font-size:13px}
+.message.spam{background:#49243a;border:1px solid rgba(255,91,145,.35)}
+.big-number{font-size:clamp(25px,3vw,40px);font-weight:850;letter-spacing:-.04em}
+.stat{min-height:112px}
+.stat .label{font-size:12px;color:var(--muted);margin-top:5px}
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:25px;align-items:stretch}
+.step{position:relative;min-height:190px}
+.step:not(:last-child):after{content:"›";position:absolute;right:-17px;top:45%;font-size:30px;color:var(--cyan);z-index:2}
+.stepno{font-size:11px;font-weight:900;color:var(--cyan);letter-spacing:.1em}
+.step p{font-size:12px;color:var(--muted);line-height:1.5}
+.step .lib{font-size:10px;font-weight:800;margin-top:16px}
+.metric{font-size:clamp(25px,3.2vw,43px);font-weight:850;letter-spacing:-.05em}
+.matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.matrix .cell{text-align:center;padding:16px 8px;background:#1a2a4d;border-radius:13px}
+.cell strong{display:block;font-size:25px;margin-bottom:4px}
+.cell span{font-size:10px;color:var(--muted)}
+.list{display:grid;gap:17px;margin-top:20px}
+.listitem{display:grid;grid-template-columns:32px 1fr;gap:10px}
+.listitem b{font-size:13px}.listitem p{font-size:11px;color:var(--muted);margin:5px 0 0;line-height:1.4}
+.roles{display:grid;gap:12px;margin-top:18px}
+.role{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(120,145,190,.15);padding-bottom:9px;font-size:12px}
+.role span:last-child{color:var(--cyan);text-align:right}
+.cover-meta{font-size:14px;color:var(--cyan);font-weight:800;letter-spacing:.12em}
+@media(max-width:850px){
+ .two{grid-template-columns:1fr}.four{grid-template-columns:repeat(2,1fr)}
+ .pipeline{grid-template-columns:1fr}.step{min-height:0}.step:not(:last-child):after{content:"↓";right:15px;top:auto;bottom:-22px}
+ .slide{padding-bottom:85px}.phone-wrap{min-height:300px}.phone{transform:none}
+}
+@media(max-width:520px){.four{grid-template-columns:1fr 1fr}.controls{right:12px;bottom:10px}.footer{bottom:18px}.slide{padding:25px 20px 90px}}
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide active">
+  <div class="eyebrow">01 / Project overview</div>
+  <div class="grid two" style="align-items:center;flex:1">
+    <div>
+      <span class="tag purple">Machine learning</span>
+      <h1 style="margin-top:24px">SMS SPAM<br><span style="color:var(--cyan)">DETECTION</span></h1>
+      <p class="subtitle" style="margin-top:22px">Classifying unwanted messages with Logistic Regression.</p>
+      <div class="accent-line"></div>
+      <div class="cover-meta">TEAM 48 &nbsp; • &nbsp; AI101 MINI-PROJECT</div>
+      <div class="roles" style="max-width:650px;margin-top:32px">
+        <div class="role"><b>Abhinav Singh</b><span>Execution Lead</span></div>
+        <div class="role"><b>Kusulure Sri Charan</b><span>Video Lead</span></div>
+        <div class="role"><b>Aadrish Deb</b><span>PPT Lead</span></div>
+        <div class="role"><b>Sadhil Khandelwal</b><span>Documentation Lead</span></div>
+      </div>
+      <p class="small" style="margin-top:20px;color:#75b9ff">github.com/Obliterator-Abhinav/sms-spam-detection</p>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone"><div class="phone-screen">
+        <div style="text-align:center;color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:.14em">MESSAGE SCAN</div>
+        <div class="message">Hey, are we meeting at 5 today?</div>
+        <div class="message spam">You won a prize! Call now to claim your reward.</div>
+        <div class="tag pink">Spam detected</div>
+        <div style="text-align:center;color:var(--green);font-weight:800;font-size:12px;margin-top:22px">MODEL PREDICTION</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">02 / Problem + data</div>
+  <h2>Can a model tell spam<br>from a real message?</h2>
+  <p class="subtitle">We frame SMS filtering as a binary classification problem: spam vs. ham (normal).</p>
+  <div class="grid two" style="margin-top:28px;flex:1">
+    <div class="card">
+      <span class="tag cyan">The problem</span>
+      <h3 style="margin-top:18px">One inbox. Two very different messages.</h3>
+      <div class="message" style="margin-top:24px"><span class="tag green">HAM</span><p>“Hey, are we meeting at 5 today?”</p></div>
+      <div class="message spam"><span class="tag pink">SPAM</span><p>“You won a prize! Call now to claim…”</p></div>
+      <p class="small">Goal: catch unwanted messages without mistaking genuine texts for spam.</p>
+    </div>
+    <div class="card">
+      <span class="tag cyan">Dataset snapshot</span>
+      <div class="grid four" style="margin-top:20px">
+        <div class="card stat"><div class="big-number" style="color:var(--blue)">5,574</div><div class="label">Original SMS</div></div>
+        <div class="card stat"><div class="big-number" style="color:var(--purple)">5,171</div><div class="label">After deduplication</div></div>
+        <div class="card stat"><div class="big-number" style="color:var(--green)">4,518</div><div class="label">Ham messages</div></div>
+        <div class="card stat"><div class="big-number" style="color:var(--pink)">653</div><div class="label">Spam messages</div></div>
+      </div>
+      <p style="font-size:11px;color:var(--yellow);font-weight:800;margin-top:22px">SOURCE / UCI SMS SPAM COLLECTION</p>
+      <p style="font-size:13px;font-weight:700">Original columns: <code>label</code> • <code>message</code></p>
+      <p class="small">Engineered features: message length, digit count, capital ratio, exclamation count and word counts.</p>
+    </div>
+  </div>
+  <p class="small" style="margin-top:12px">5,574 → 5,171 after removing 403 duplicate messages • English-language SMS data.</p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">03 / Approach</div>
+  <h2>From raw text to a spam prediction</h2>
+  <p class="subtitle">A reproducible pipeline: prepare → represent → train → evaluate.</p>
+  <div class="pipeline">
+    <div class="card step"><div class="stepno">01</div><h3 style="margin-top:13px">LOAD DATA</h3><p>SMS text + labels</p><div class="lib" style="color:var(--blue)">PANDAS</div></div>
+    <div class="card step"><div class="stepno" style="color:var(--purple)">02</div><h3 style="margin-top:13px">PREPROCESS</h3><p>Deduplicate • encode labels • create four numeric features</p><div class="lib" style="color:var(--purple)">PANDAS / NUMPY</div></div>
+    <div class="card step"><div class="stepno" style="color:var(--cyan)">03</div><h3 style="margin-top:13px">VECTORIZЕ</h3><p>Count words • select top 1,000 using chi-square</p><div class="lib" style="color:var(--cyan)">SCIKIT-LEARN</div></div>
+    <div class="card step"><div class="stepno" style="color:var(--yellow)">04</div><h3 style="margin-top:13px">TRAIN</h3><p>80/20 stratified split • StandardScaler • Logistic Regression</p><div class="lib" style="color:var(--yellow)">SCIKIT-LEARN</div></div>
+    <div class="card step"><div class="stepno" style="color:var(--pink)">05</div><h3 style="margin-top:13px">PREDICT</h3><p>Classify unseen text as HAM or SPAM</p><div class="lib" style="color:var(--pink)">MODEL OUTPUT</div></div>
+  </div>
+  <div class="grid two" style="margin-top:25px">
+    <div class="card"><span class="tag cyan">Training setup</span><h3 style="margin-top:13px">80% train / 20% test</h3><p class="small">random_state = 42 • class_weight = balanced</p></div>
+    <div class="card"><span class="tag cyan">Key libraries</span><h3 style="margin-top:13px">Pandas • NumPy • Matplotlib</h3><p class="small">Seaborn • Scikit-learn</p></div>
+  </div>
+  <p class="small" style="margin-top:12px">Vectorizer and scaler are fitted on training data only to avoid test-data leakage.</p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">04 / Results</div>
+  <h2>Strong test performance —<br>with spam misses still visible</h2>
+  <p class="subtitle">Held-out test set: 1,035 messages, including 131 spam messages.</p>
+  <div class="grid four" style="margin-top:25px">
+    <div class="card"><div class="metric" style="color:var(--blue)">98.94%</div><div class="small">Accuracy</div></div>
+    <div class="card"><div class="metric" style="color:var(--purple)">97.62%</div><div class="small">Precision</div></div>
+    <div class="card"><div class="metric" style="color:var(--pink)">93.89%</div><div class="small">Recall</div></div>
+    <div class="card"><div class="metric" style="color:var(--green)">95.72%</div><div class="small">F1-score</div></div>
+  </div>
+  <div class="grid two" style="margin-top:20px;flex:1">
+    <div class="card">
+      <span class="tag cyan">Confusion matrix / test set</span>
+      <div class="matrix">
+        <div class="cell"><strong style="color:var(--green)">901</strong><span>True ham</span></div>
+        <div class="cell"><strong style="color:var(--yellow)">3</strong><span>False alarm</span></div>
+        <div class="cell"><strong style="color:var(--pink)">8</strong><span>Missed spam</span></div>
+        <div class="cell"><strong style="color:var(--blue)">123</strong><span>Caught spam</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag cyan">What the numbers tell us</span>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-top:22px"><div class="metric" style="color:var(--green)">123 / 131</div><b style="font-size:13px">spam messages detected</b></div>
+      <div class="list">
+        <div class="listitem"><span style="color:var(--yellow)">●</span><div><b>3 normal messages</b><p>were incorrectly flagged as spam.</p></div></div>
+        <div class="listitem"><span style="color:var(--pink)">●</span><div><b>8 spam messages</b><p>were missed by the model.</p></div></div>
+        <div class="listitem"><span style="color:var(--cyan)">●</span><div><b>F1-score</b><p>balances precision and recall.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:12px">Accuracy alone can mislead on imbalanced data: always predicting ham would already score about 87%.</p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">05 / Learnings + ownership</div>
+  <h2>What we learned —<br>and who owned each part</h2>
+  <p class="subtitle">A useful classifier is more than a high accuracy score: it needs reliable data handling and honest evaluation.</p>
+  <div class="grid two" style="margin-top:25px;flex:1">
+    <div class="card">
+      <span class="tag cyan">Key learnings</span>
+      <div class="list">
+        <div class="listitem"><span class="tag blue">01</span><div><b>Text needs numbers</b><p>CountVectorizer turns words into features the model can use.</p></div></div>
+        <div class="listitem"><span class="tag purple">02</span><div><b>Class imbalance matters</b><p>Precision, recall and F1 reveal more than accuracy alone.</p></div></div>
+        <div class="listitem"><span class="tag yellow">03</span><div><b>Evaluation must be honest</b><p>The model missed 8 spam messages; test performance is below training F1.</p></div></div>
+        <div class="listitem"><span class="tag pink">04</span><div><b>Data has limits</b><p>2011 English SMS may not represent today's Indian spam, OTP and Hinglish scams.</p></div></div>
+      </div>
+    </div>
+    <div style="display:grid;gap:16px;grid-template-rows:1fr auto">
+      <div class="card">
+        <span class="tag cyan">Team ownership / Team 48</span>
+        <div class="roles">
+          <div class="role"><b>Abhinav Singh</b><span>Execution Lead</span></div>
+          <div class="role"><b>Kusulure Sri Charan</b><span>Video Lead</span></div>
+          <div class="role"><b>Aadrish Deb</b><span>PPT Lead</span></div>
+          <div class="role"><b>Sadhil Khandelwal</b><span>Documentation Lead</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag cyan">AI-use disclosure</span>
+        <p class="small" style="margin-top:12px;color:var(--white)">Claude assisted with the first notebook-code draft, README, requirements and debugging. ChatGPT assisted with presentation structure and slide design. The team reviewed and verified the project; dataset and results were not AI-generated.</p>
+      </div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:12px">Limitation: results on modern, multilingual SMS spam were not tested.</p>
+</section>
+</div>
+
+<div class="footer"><span>AI101 • Data Science & AI Essentials • IIT Ropar</span><span id="counter">01 / 05</span></div>
+<div class="controls">
+  <button id="prev" aria-label="Previous slide">← Prev</button>
+  <button id="next" aria-label="Next slide">Next →</button>
+  <button id="full" aria-label="Toggle fullscreen">⛶</button>
+</div>
+<div class="progress" id="progress" style="width:20%"></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=0;
+function show(n){
+ current=Math.max(0,Math.min(slides.length-1,n));
+ slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+ document.getElementById('counter').textContent=String(current+1).padStart(2,'0')+' / 05';
+ document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
+ document.getElementById('prev').disabled=current===0;
+ document.getElementById('next').disabled=current===slides.length-1;
+}
+document.getElementById('prev').addEventListener('click',()=>show(current-1));
+document.getElementById('next').addEventListener('click',()=>show(current+1));
+document.getElementById('full').addEventListener('click',()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()});
+document.addEventListener('keydown',e=>{
+ if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();show(current+1)}
+ if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}
+ if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);
+});
+show(0);
+</script>
+</body>
+</html>
