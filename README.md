@@ -88,7 +88,7 @@ git clone https://github.com/Obliterator-Abhinav/sms-spam-detection.git
 cd sms-spam-detection
 ```
 
-You should see `data`, `requirements.txt` and `SMS_Spam_Logistic_Regression.ipynb` in the folder.
+You should see `data`, `requirements.txt` and `SMS_Spam_Logistic_Regression.ipynb` in the folder and line should end eith sms-spam-detection>.
 
 ### Step 2: Create a virtual environment
 This keeps the project's libraries separate from everything else on the computer.
