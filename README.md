@@ -95,12 +95,12 @@ This keeps the project's libraries separate from everything else on the computer
  
 **Windows (Command Prompt):**
 ```
-py -3.13 -m venv venv
+py -m venv venv
 ```
 ```
 venv\Scripts\activate
 ```
-(Use `py -3.12` if you only have Python 3.12.)
+
  
 **Mac / Linux:**
 ```
@@ -117,15 +117,15 @@ The line in the terminal should now start with `(venv)`. Check with `python --ve
 ```
 pip install -r requirements.txt
 ```
-If there is an error of 'Blocked by your organization' something like that, try
+If there is an error, try
 ```
-python -m pip install -r requirements.txt
+py -m pip install -r requirements.txt
 ```
 This takes about 2 to 5 minutes. It must end with a line that starts with `Successfully installed`. If you see red text with `error`, see the table at the bottom.
  
 ### Step 4: Start Jupyter Notebook
 ```
-jupyter notebook
+py -m jupyter notebook
 ```
 A browser tab opens. If it does not, copy the `http://localhost:8888/...` address from the terminal into your browser. Leave the terminal window open while you use the notebook.
  
