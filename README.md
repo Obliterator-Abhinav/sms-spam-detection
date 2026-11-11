@@ -81,16 +81,12 @@ Check your Python version first:
 | Mac / Linux | `python3 --version` (or `python3.13 --version`) |
 
 ### Step 1: Download the project
-Open a terminal (Windows: Command Prompt, `cmd`) inside the folder where you want the project by typing cmd in the address bar, then run:
-
+Open a terminal in the folder where you want the project. On Windows, type cmd in the folder’s address bar. On Mac, open Terminal. On Linux, open your terminal. Then run:
 ```
 git clone https://github.com/Obliterator-Abhinav/sms-spam-detection.git
-```
-```
 cd sms-spam-detection
 ```
-
-You should see `data`, `requirements.txt` and `SMS_Spam_Logistic_Regression.ipynb` in the folder and line should end eith sms-spam-detection>.
+Check that data, requirements.txt and SMS_Spam_Logistic_Regression.ipynb are listed (use dir on Windows or ls on Mac/Linux). On Windows the prompt ends with sms-spam-detection>. On Mac/Linux it ends with % or $.
 
 ### Step 2: Create a virtual environment
 This keeps the project's libraries separate from everything else on the computer.
@@ -106,7 +102,7 @@ venv\Scripts\activate
  
 **Mac / Linux:**
 ```
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 ```
 
@@ -120,14 +116,23 @@ The line in the terminal should now start with `(venv)`. Check with `python --ve
 pip install -r requirements.txt
 ```
 If there is an error, try
+Windows:
 ```
 py -m pip install -r requirements.txt
+```
+Mac/Linux:
+```
+python -m pip install -r requirements.txt
 ```
 This takes about 2 to 5 minutes. It must end with a line that starts with `Successfully installed`. If you see red text with `error`, see the table at the bottom.
  
 ### Step 4: Start Jupyter Notebook
 ```
 py -m notebook
+```
+For Mac/Linux:
+```
+python -m notebook
 ```
 A browser tab opens. If it does not, copy the `http://localhost:8888/...` address from the terminal into your browser. Leave the terminal window open while you use the notebook.
  
