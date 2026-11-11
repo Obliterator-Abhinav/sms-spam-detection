@@ -104,10 +104,10 @@ venv\Scripts\activate
  
 **Mac / Linux:**
 ```
-python3.13 -m venv venv
+python -m venv venv
 source venv/bin/activate
 ```
-(Use `python3.12` if you only have Python 3.12.)
+
  
 The line in the terminal should now start with `(venv)`. Check with `python --version`: it must show 3.13.x or 3.12.x.
  
