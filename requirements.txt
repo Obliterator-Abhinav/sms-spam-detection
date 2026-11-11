@@ -1,9 +1,13 @@
 # SMS Spam Detection (AI101 Mini Project)
 #
-# REQUIRES Python 3.12 or newer (numpy 2.5.x and scipy 1.18.x do not
-# install on Python 3.11 or older). Check yours with:  python --version
+# REQUIRES Python 3.12, 3.13 or 3.14 (64-bit).
+#   - Python 3.11 or older: numpy 2.5.x and scipy 1.18.x do not install.
+#   - Python 3.15 or newer: no ready-made packages yet, so pip tries to
+#     build pandas from source and fails.
+# Check your version with:  python --version   (or  py -0p  on Windows)
 #
-# Install with:  pip install -r requirements.txt
+# Install with:  python -m pip install -r requirements.txt
+# On Windows with several Pythons installed:  py -3.13 -m pip install -r requirements.txt
 #
 # These are the exact versions used to run the notebook and produce the
 # results in the README, slides and video.
