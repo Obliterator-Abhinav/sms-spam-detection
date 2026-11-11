@@ -85,6 +85,8 @@ Open a terminal (Windows: Command Prompt, `cmd`) inside the folder where you wan
 
 ```
 git clone https://github.com/Obliterator-Abhinav/sms-spam-detection.git
+```
+```
 cd sms-spam-detection
 ```
 
@@ -125,7 +127,7 @@ This takes about 2 to 5 minutes. It must end with a line that starts with `Succe
  
 ### Step 4: Start Jupyter Notebook
 ```
-py -m jupyter notebook
+py -m notebook
 ```
 A browser tab opens. If it does not, copy the `http://localhost:8888/...` address from the terminal into your browser. Leave the terminal window open while you use the notebook.
  
