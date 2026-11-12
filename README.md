@@ -67,10 +67,10 @@ sms-spam-detection/
 
 ## Setup and how to run
 
-Tested on Windows 11 with Python 3.13 (64-bit). The Mac and Linux commands below are the standard equivalents.
+Tested on Windows 11 with Python 3.13 and 3.14 (64-bit). The Mac and Linux commands below are the standard equivalents.
 
 ### What you need
-- **Python** 3.12, 3.13 or 3.14 (64-bit). Do not use Python 3.11 or older, and do not use 3.15 or newer. The libraries in requirements.txt do not install on those versions.
+- **Python** 3.12, 3.13, or 3.14 (64-bit). Do not use Python 3.11 or older, and do not use 3.15 or newer. The libraries in requirements.txt do not install on those versions.
 - **Git**, to download the project.
 - About 1 GB of free disk space and an internet connection for the install.
 
@@ -179,7 +179,7 @@ Use this if the computer already has Visual Studio Code. Steps 1 to 3 are the sa
 1. **Install the extensions (one time).** In VS Code, click the Extensions icon on the left (four squares), then search for and install **Python** and **Jupyter** (both from Microsoft). If VS Code asks to install them when you open the notebook, click Install.
 2. **Open the project folder.** Click **File → Open Folder** and choose the cloned project folder (the one that contains `data` and `requirements.txt`). Click "Yes, I trust the authors" if asked. Opening the folder matters: the notebook reads `data/sms_spam.csv`, which only works from the project folder.
 3. **Open the notebook.** Click `SMS_Spam_Logistic_Regression.ipynb` in the file list.
-4. **Select the right kernel.** Click **Select Kernel** at the top right of the notebook, then **Python Environments**, and choose the one named **venv** (its path ends with `venv\Scripts\python.exe` on Windows or `venv/bin/python` on Mac/Linux). It must show Python 3.13 or 3.12. If `venv` is not in the list, click the refresh icon, or close and reopen VS Code and try again.
+4. **Select the right kernel.** Click **Select Kernel** at the top right of the notebook, then **Python Environments**, and choose the one named **venv** (its path ends with `venv\Scripts\python.exe` on Windows or `venv/bin/python` on Mac/Linux). It must show Python 3.13, 3.14, or 3.12. If `venv` is not in the list, click the refresh icon, or close and reopen VS Code and try again.
 5. **Run everything.** Click **Run All** at the top of the notebook and wait until every cell finishes (about 10 seconds to 1 minute).
 6. **Check the result** with the table in Step 6 above. There should be no red errors.
 
