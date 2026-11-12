@@ -58,6 +58,7 @@ sms-spam-detection/
 │   └── top_coefficients.png
 ├── docs/
 │   ├── expected_output.png
+|   ├── results.png
 │   └── slides.pdf
 ├── SMS_Spam_Logistic_Regression.ipynb
 ├── requirements.txt
