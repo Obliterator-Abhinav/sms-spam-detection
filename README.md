@@ -77,7 +77,7 @@ Check your Python version first:
 
 | System | Command |
 |---|---|
-| Windows | `py -0p` (lists all installed Pythons, look for 3.13 or 3.12) |
+| Windows | `py -0p` (lists all installed Pythons, look for 3.13, 3.12, or 3.14) |
 | Mac / Linux | `python3 --version` (or `python3.13 --version`) |
 
 ### Step 1: Download the project
@@ -143,7 +143,7 @@ A browser tab opens. If it does not, copy the `http://localhost:8888/...` addres
 > py -3.13 -m pip install -r requirements.txt
 > py -3.13 -m jupyter notebook
 > ```
-> Use 3.14 or 3.15, if you have that. On Mac / Linux use `python3.13 -m pip install -r requirements.txt` and `python3.13 -m jupyter notebook`. Always use Python 3.12, 3.13, or 3.15 because other versions fail to install the libraries.
+> Use 3.14 or 3.12, if you have that. On Mac / Linux use `python3.13 -m pip install -r requirements.txt` and `python3.13 -m jupyter notebook`. Always use Python 3.12, 3.13, or 3.14 because other versions fail to install the libraries.
 
  
 ### Step 5: Run the notebook
@@ -190,7 +190,7 @@ If VS Code shows `ModuleNotFoundError`, the wrong kernel is selected. Repeat ste
 |---|---|---|
 | `git is not recognized` | Git is not installed, or the terminal was opened before installing it | Install Git from git-scm.com, then open a new terminal |
 | `py is not recognized` or `python3: command not found` | Python is not installed | Install Python 3.13 (64-bit) from python.org and tick "Add Python to PATH" |
-| `No matching distribution found` or `Could not find vswhere.exe` or a long build error during `pip install` | Python is too old (3.11 or older) or too new (3.14 or newer) | Install Python 3.13, then repeat Step 2 and Step 3 |
+| `No matching distribution found` or `Could not find vswhere.exe` or a long build error during `pip install` | Python is too old (3.11 or older) or too new (3.15 or newer) | Install Python 3.13, then repeat Step 2 and Step 3 |
 | `ModuleNotFoundError` in the notebook | The `(venv)` was not active, or Step 3 did not finish | Activate the environment (Step 2), run `pip install -r requirements.txt` again, then restart Jupyter |
 | `jupyter is not recognized` | The `(venv)` is not active | Repeat the activate command from Step 2 |
 | `FileNotFoundError: data/sms_spam.csv` | Jupyter was started outside the project folder, or `data/` is missing | Close Jupyter, `cd` into the project folder, and run `jupyter notebook` again |
