@@ -246,5 +246,5 @@ The notebook also shows five plots (class balance, correlation heatmap, loss cur
 
 ## AI-use disclosure
 
-- Claude (Anthropic): used by us to write the first version of the notebook code, to draft the README and `requirements.txt`, to guide us through Github, and to help us fix errors. We read, ran and checked all of it, and every member can explain the code.
+- Claude (Anthropic): used by us to write the first version of the notebook code, to guide us through Github, and to help us fix errors. We read, ran and checked all of it, and every member can explain the code.
 - No AI was used to generate the dataset or the results. The numbers come from running the notebook on the dataset.
