@@ -107,7 +107,9 @@ source venv/bin/activate
 ```
 
  
-The line in the terminal should now start with `(venv)`. Check with `python --version`: it must show 3.13.x or 3.12.x.
+The line in the terminal should now start with `(venv)`. Check with python --version: it must show 3.12.x, 3.13.x or 3.14.x. If it shows another version (for example 3.15, or 3.10), delete the venv folder and create it again with a specific version: py -3.13 -m venv venv on Windows, or python3.13 -m venv venv on Mac / Linux.
+
+
  
 > Windows PowerShell may say "running scripts is disabled" when you activate. Use Command Prompt (`cmd`) instead.
  
@@ -141,7 +143,7 @@ A browser tab opens. If it does not, copy the `http://localhost:8888/...` addres
 > py -3.13 -m pip install -r requirements.txt
 > py -3.13 -m jupyter notebook
 > ```
-> (Use `-3.12` if that is the version you have.) On Mac / Linux use `python3.13 -m pip install -r requirements.txt` and `python3.13 -m jupyter notebook`. Always use Python 3.12 or 3.13, because other versions fail to install the libraries.
+> Use 3.14 or 3.15, if you have that. On Mac / Linux use `python3.13 -m pip install -r requirements.txt` and `python3.13 -m jupyter notebook`. Always use Python 3.12, 3.13, or 3.15 because other versions fail to install the libraries.
 
  
 ### Step 5: Run the notebook
