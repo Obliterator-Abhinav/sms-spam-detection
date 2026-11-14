@@ -117,7 +117,6 @@ cd sms-spam-detection
 Check that data, requirements.txt and SMS_Spam_Logistic_Regression.ipynb are listed (use dir on Windows or ls on Mac/Linux). On Windows the prompt ends with sms-spam-detection>. On Mac/Linux it ends with % or $.
 
 ### Step 2: Create a virtual environment
-This keeps the project's libraries separate from everything else on the computer.
  
 **Windows (Command Prompt):**
 ```
@@ -137,8 +136,6 @@ source venv/bin/activate
  
 The line in the terminal should now start with `(venv)`. Check with python --version: it must show 3.12.x, 3.13.x or 3.14.x. If it shows another version (for example 3.15, or 3.10), delete the venv folder and create it again with a specific version: py -3.13 -m venv venv on Windows, or python3.13 -m venv venv on Mac / Linux.
 
-
- 
 > Windows PowerShell may say "running scripts is disabled" when you activate. Use Command Prompt (`cmd`) instead.
  
 ### Step 3: Install the libraries
@@ -154,7 +151,7 @@ Mac/Linux:
 ```
 python3 -m pip install -r requirements.txt
 ```
-This takes about 2 to 5 minutes. It must end with a line that starts with `Successfully installed`. If you see red text with `error`, see the table at the bottom.
+If you see red text with `error`, see the table at the bottom.
  
 ### Step 4: Start Jupyter Notebook
 ```
