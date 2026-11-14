@@ -81,6 +81,33 @@ Check your Python version first:
 | Windows | `py -0p` (lists all installed Pythons, look for 3.13, 3.12, or 3.14) |
 | Mac / Linux | `python3 --version` (or `python3.13 --version`) |
 
+
+### Quick start (copy and paste)
+
+If you already have Python 3.12, 3.13 or 3.14 and Git, these commands run the whole project. If a command fails, use the detailed steps below.
+
+**Windows (Command Prompt, not PowerShell):**
+```
+git clone https://github.com/Obliterator-Abhinav/sms-spam-detection.git
+cd sms-spam-detection
+py -3.13 -m venv venv
+venv\Scripts\activate
+python -m pip install -r requirements.txt
+python -m notebook
+```
+
+**Mac / Linux:**
+```
+git clone https://github.com/Obliterator-Abhinav/sms-spam-detection.git
+cd sms-spam-detection
+python3.13 -m venv venv
+source venv/bin/activate
+python -m pip install -r requirements.txt
+python -m notebook
+```
+
+(If you have 3.12 or 3.14 instead of 3.13, use that number in the `py -3.13` or `python3.13` line.) Then open `SMS_Spam_Logistic_Regression.ipynb`, click **Run All**, and check that the test accuracy is 0.9894 and the F1-score is 0.9572
+
 ### Step 1: Download the project
 Open a terminal in the folder where you want the project. On Windows, type cmd in the folder’s address bar. On Mac, open Terminal. On Linux, open your terminal. Then run:
 ```
